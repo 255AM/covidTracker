@@ -2,39 +2,63 @@ const usCsv = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us
 const stateCsv = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
 const countyCsv = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
 let usData = []
-let stateData = []
-let countyData = []
+let usDates = []
 
-
-function saveData(location, fileName ){
-    d3.csv(location, function(data) {
-    fileName.push(data)
-    console.log('donesavedata')
-});
-
-}
-
-saveData(usCsv, usData)
-saveData(stateCsv, stateData)
-saveData(countyCsv, countyData)
- 
-
-
-function makeChart(usData) {
-    var usDates = usData.map(function(d) {return d.date});
-    var usCases = usData.map(function(d) {return d.cases});
-    console.log('donemakechartssssssssssssssssa')
-    var usChart = new Chart('usChart', {
-      type: 'bar',
-      data: {
-        labels: usDates,
-        datasets: [
-          {
-            data: usCases
-          }
-        ]
-      }
-    });
-  }
-  makeChart(usData)
+d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", function(data) {
+  usData.push(data)
   
+  
+//usData.forEach(element => usDate.push(element.date));
+}).then(makeChart)  
+  
+function makeChart(){
+  usDates = usData.map(function(d) {return d.date});
+  usCases = usData.map(function(d) {return d.cases})
+  var usChart = new Chart('usChart', {
+    type: 'bar',
+    data: {
+      labels: [usDates],
+      datasets: [{
+        label: '# of Tomatoes',
+        data: [usCases],
+        backgroundColor: [
+          'blue'
+          
+        ],
+        borderColor: [
+          'red'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            maxRotation: 90,
+            minRotation: 80
+          },
+            gridLines: {
+            offsetGridLines: false // à rajouter
+          }
+        },
+        {
+          
+          ticks: {
+            maxRotation: 90,
+            minRotation: 80
+          },
+          gridLines: {
+            offsetGridLines: false // et matcher pareil ici
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}

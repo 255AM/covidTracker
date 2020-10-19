@@ -5,6 +5,7 @@ let usData = []
 let allStateData = []
 let countyData = []
 let selectedStateData = []
+let uniqueStates = []
 
 d3.csv(usCsv, function(data) {
   usData.push(data)
@@ -14,7 +15,7 @@ d3.csv(stateCsv, function(data) {
   allStateData.push(data)
 }).then(makeStateChart)
 
-
+//onselect run makeStateChart with updated state
 
   //d3.csv(stateCsv, function(data) {
   //stateData.push(data)  
@@ -23,7 +24,7 @@ d3.csv(stateCsv, function(data) {
   usDates = usData.map(function(d) {return d.date});
   usCases = usData.map(function(d) {return d.cases})
   usDeaths = usData.map(function(d) {return d.deaths})
-
+  
   var usChart = new Chart('usChart', {
     type: "bar",
     data: {
@@ -73,7 +74,17 @@ function makeStateChart(){
   stateCases = selectedStateData.map(function(d) {return d.cases})
   stateDeaths = selectedStateData.map(function(d) {return d.deaths})
   stateName = selectedStateData[0].state
-   
+  usStates = allStateData.map(function(d) {return d.state})
+  uniqueStates = usStates.filter(onlyUnique).sort(); 
+  
+  let stateSelctor = uniqueStates;     
+  let sel = document.getElementById('statesList');
+    for(let i = 0; i < uniqueStates.length; i++) {
+    let opt = document.createElement('option');
+    opt.innerHTML = uniqueStates[i];
+    opt.value = uniqueStates[i];
+    sel.appendChild(opt);
+}
   
 
   var stateChart = new Chart('stateChart', {
@@ -118,5 +129,11 @@ function makeStateChart(){
       }
     }
   });
+}
+
+
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
 }
 

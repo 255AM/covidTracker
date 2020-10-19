@@ -22,26 +22,47 @@ d3.csv(stateCsv, function(data) {
  function makeUsChart(){
   usDates = usData.map(function(d) {return d.date});
   usCases = usData.map(function(d) {return d.cases})
+  usDeaths = usData.map(function(d) {return d.deaths})
 
-  var chart = new Chart('usChart', {
+  var usChart = new Chart('usChart', {
     type: "bar",
+    data: {
+      datasets: [{
+          data: usCases,
+          label: 'US Cases',
+          yAxisID: 'left-y-axis'
+      },  {
+          data: usDeaths,
+          label: 'US Deaths',
+          yAxisID: 'right-y-axis'
+      }],
+      labels: usDates
+    },
     options: {
       maintainAspectRatio: false,
-      legend: {
-        display: true
+      scales:{
+        yAxes:[{
+          id: 'left-y-axis',
+          type: 'linear',
+          position: 'left'
+        }, {
+          id: 'right-y-axis',
+          type: 'linear',
+          position: 'right',
+            
+        }],
+        xAxis:[{
+          type: 'time',
+          time: {
+            unit: 'month',
+                }
+        
+        }] 
+          
       }
-    },
-    data: {
-      labels: usDates,
-      datasets: [
-        {
-          data: usCases
-        }
-      ]
     }
   });
 }
-
 function makeStateChart(){
   for (index = 0 ; index <= allStateData.length-1; index++){
     if (allStateData[index].fips == 18){
@@ -52,17 +73,19 @@ function makeStateChart(){
   stateCases = selectedStateData.map(function(d) {return d.cases})
   stateDeaths = selectedStateData.map(function(d) {return d.deaths})
   stateName = selectedStateData[0].state
+   
+  
 
   var stateChart = new Chart('stateChart', {
     type: "bar",
     data: {
       datasets: [{
           data: stateCases,
-          label: 'Left dataset',
+          label: stateName + ' Cases',
           yAxisID: 'left-y-axis'
       },  {
           data: stateDeaths,
-          label: 'Right dataset',
+          label: stateName + ' Deaths',
           yAxisID: 'right-y-axis'
       }],
       labels: stateDates
@@ -79,20 +102,17 @@ function makeStateChart(){
           type: 'linear',
           position: 'right',
             ticks: {
-              max: 9000,
+              max:Number(stateDeaths[stateDeaths.length-1])*3,
               min: 0,
-              stepSize: 1000,
+               
             }
-
         }],
         xAxis:[{
-          id: 'x-axis',
-          type: 'linear',
-            ticks: {
-              max: 12,
-              min: 12,
-              stepSize: 1
-        }
+          type: 'time',
+          time: {
+            unit: 'month',
+                }
+        
         }] 
           
       }
@@ -100,9 +120,3 @@ function makeStateChart(){
   });
 }
 
-// options: {
-//   maintainAspectRatio: false,
-//   legend: {
-//     display: true
-//   }
-// },

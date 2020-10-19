@@ -14,51 +14,22 @@ d3.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv", 
 function makeChart(){
   usDates = usData.map(function(d) {return d.date});
   usCases = usData.map(function(d) {return d.cases})
-  var usChart = new Chart('usChart', {
-    type: 'bar',
-    data: {
-      labels: [usDates],
-      datasets: [{
-        label: '# of Tomatoes',
-        data: [usCases],
-        backgroundColor: [
-          'blue'
-          
-        ],
-        borderColor: [
-          'red'
-        ],
-        borderWidth: 1
-      }]
-    },
+
+  var chart = new Chart('usChart', {
+    type: "bar",
     options: {
-      responsive: true,
-      scales: {
-        xAxes: [{
-          ticks: {
-            maxRotation: 90,
-            minRotation: 80
-          },
-            gridLines: {
-            offsetGridLines: false // à rajouter
-          }
-        },
-        {
-          
-          ticks: {
-            maxRotation: 90,
-            minRotation: 80
-          },
-          gridLines: {
-            offsetGridLines: false // et matcher pareil ici
-          }
-        }],
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
+      maintainAspectRatio: false,
+      legend: {
+        display: true
       }
+    },
+    data: {
+      labels: usDates,
+      datasets: [
+        {
+          data: usCases
+        }
+      ]
     }
   });
 }

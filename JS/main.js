@@ -6,8 +6,7 @@ let allStateData = []
 let countyData = []
 let selectedStateData = []
 let uniqueStates = []
-
-
+let x = 0
 
 d3.csv(usCsv, function(data) {
   usData.push(data)
@@ -17,10 +16,8 @@ d3.csv(stateCsv, function(data) {
   allStateData.push(data)
 }).then(makeStateChart)
 
-
- 
-  
- function makeUsChart(){
+function makeUsChart(){
+   
   usDates = usData.map(function(d) {return d.date});
   usCases = usData.map(function(d) {return d.cases})
   usDeaths = usData.map(function(d) {return d.deaths})
@@ -70,13 +67,17 @@ d3.csv(stateCsv, function(data) {
     }
   });
 }
+
 function makeStateChart(value){
+  console.log('im here', typeof value)
+  if (x==0){value = 'Alabama'; x=+1}
+
   selectedStateData = []
   for (index = 0 ; index <= allStateData.length-1; index++){
       if (allStateData[index].state == value){
           selectedStateData.push(allStateData[index])
       }                   
-} 
+  } 
   stateDates = selectedStateData.map(function(d) {return d.date});
   stateCases = selectedStateData.map(function(d) {return d.cases})
   stateDeaths = selectedStateData.map(function(d) {return d.deaths})
@@ -84,20 +85,18 @@ function makeStateChart(value){
   usStates = allStateData.map(function(d) {return d.state})
   uniqueStates = usStates.filter(onlyUnique).sort(); 
   
-  let stateSelctor = uniqueStates;     
+  let stateSelector = uniqueStates;     
   let sel = document.getElementById('statesList');
     for(let i = 0; i < uniqueStates.length; i++) {
-    let opt = document.createElement('option');
-    opt.innerHTML = uniqueStates[i];
-    opt.value = uniqueStates[i];
-    sel.appendChild(opt);
-}
+      let opt = document.createElement('option');
+      opt.innerHTML = uniqueStates[i];
+      opt.value = uniqueStates[i];
+      sel.appendChild(opt);
+    }
 
-
-  var stateChart = new Chart('stateChart', {
+  window.stateChart = new Chart('stateChart', {
     type: "bar",
     data: {
-      
       datasets: [{
           data: stateCases,
           backgroundColor: 'rgba(121, 121, 255, 0.9)',
@@ -133,17 +132,17 @@ function makeStateChart(value){
           time: {
             unit: 'month',
                 }
-        
         }] 
-          
       }
     }
   });
 }
 
-
-
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
 
+function destroyChart(stateChart){
+  window.stateChart.destroy()
+  console.log('yup')
+}

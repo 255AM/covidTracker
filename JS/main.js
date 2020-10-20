@@ -17,13 +17,12 @@ d3.csv(stateCsv, function(data) {
 }).then(makeStateChart)
 
 function makeUsChart(){
-   
   usDates = usData.map(function(d) {return d.date});
   usCases = usData.map(function(d) {return d.cases})
   usDeaths = usData.map(function(d) {return d.deaths})
   
   var usChart = new Chart('usChart', {
-    type: "bar",
+    type: "line",
     data: {
       datasets: [{
           data: usCases,
@@ -34,12 +33,10 @@ function makeUsChart(){
       },  {
           data: usDeaths,
           //this changes legend bg color
-          
+          backgroundColor: 'red',
           label: 'US Deaths',
           yAxisID: 'right-y-axis'
-          
       }],
-      
       labels: usDates
     },
     options: {
@@ -53,16 +50,17 @@ function makeUsChart(){
           id: 'right-y-axis',
           type: 'linear',
           position: 'right',
-            
+          ticks: {
+            max:Number(usDeaths[usDeaths.length-1])*3,
+            min: 0,
+          }
         }],
         xAxis:[{
           type: 'time',
           time: {
             unit: 'month',
                 }
-        
         }] 
-          
       }
     }
   });
@@ -104,6 +102,7 @@ function makeStateChart(value){
           yAxisID: 'left-y-axis'
       },  {
           data: stateDeaths,
+          backgroundColor: 'red',
           label: stateName + ' Deaths',
           yAxisID: 'right-y-axis'
       }],

@@ -15,10 +15,9 @@ d3.csv(stateCsv, function(data) {
   allStateData.push(data)
 }).then(makeStateChart)
 
-//onselect run makeStateChart with updated state
+window.onload = makeStateChart
 
-  //d3.csv(stateCsv, function(data) {
-  //stateData.push(data)  
+ 
   
  function makeUsChart(){
   usDates = usData.map(function(d) {return d.date});
@@ -65,15 +64,16 @@ d3.csv(stateCsv, function(data) {
   });
 }
 function makeStateChart(){
+  
   for (index = 0 ; index <= allStateData.length-1; index++){
-    if (allStateData[index].fips == 18){
-        selectedStateData.push(allStateData[index])
-    }                   
+      if (allStateData[index].state == 'Alabama'){
+          selectedStateData.push(allStateData[index])
+      }                   
 } 
   stateDates = selectedStateData.map(function(d) {return d.date});
   stateCases = selectedStateData.map(function(d) {return d.cases})
   stateDeaths = selectedStateData.map(function(d) {return d.deaths})
-  stateName = selectedStateData[0].state
+  stateName = 'Alabama'
   usStates = allStateData.map(function(d) {return d.state})
   uniqueStates = usStates.filter(onlyUnique).sort(); 
   
@@ -85,7 +85,9 @@ function makeStateChart(){
     opt.value = uniqueStates[i];
     sel.appendChild(opt);
 }
-  
+  if (stateChart == true){
+    stateChart.destroy()
+  }
 
   var stateChart = new Chart('stateChart', {
     type: "bar",

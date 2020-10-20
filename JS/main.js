@@ -7,6 +7,8 @@ let countyData = []
 let selectedStateData = []
 let uniqueStates = []
 
+
+
 d3.csv(usCsv, function(data) {
   usData.push(data)
 }).then(makeUsChart)
@@ -15,7 +17,6 @@ d3.csv(stateCsv, function(data) {
   allStateData.push(data)
 }).then(makeStateChart)
 
-window.onload = makeStateChart
 
  
   
@@ -29,13 +30,19 @@ window.onload = makeStateChart
     data: {
       datasets: [{
           data: usCases,
+          //this changes legend bg color
+          backgroundColor: 'rgba(121, 121, 255, 0.9)',
           label: 'US Cases',
           yAxisID: 'left-y-axis'
       },  {
           data: usDeaths,
+          //this changes legend bg color
+          
           label: 'US Deaths',
           yAxisID: 'right-y-axis'
+          
       }],
+      
       labels: usDates
     },
     options: {
@@ -63,17 +70,17 @@ window.onload = makeStateChart
     }
   });
 }
-function makeStateChart(){
-  
+function makeStateChart(value){
+  selectedStateData = []
   for (index = 0 ; index <= allStateData.length-1; index++){
-      if (allStateData[index].state == 'Alabama'){
+      if (allStateData[index].state == value){
           selectedStateData.push(allStateData[index])
       }                   
 } 
   stateDates = selectedStateData.map(function(d) {return d.date});
   stateCases = selectedStateData.map(function(d) {return d.cases})
   stateDeaths = selectedStateData.map(function(d) {return d.deaths})
-  stateName = 'Alabama'
+  stateName = value
   usStates = allStateData.map(function(d) {return d.state})
   uniqueStates = usStates.filter(onlyUnique).sort(); 
   
@@ -85,15 +92,15 @@ function makeStateChart(){
     opt.value = uniqueStates[i];
     sel.appendChild(opt);
 }
-  if (stateChart == true){
-    stateChart.destroy()
-  }
+
 
   var stateChart = new Chart('stateChart', {
     type: "bar",
     data: {
+      
       datasets: [{
           data: stateCases,
+          backgroundColor: 'rgba(121, 121, 255, 0.9)',
           label: stateName + ' Cases',
           yAxisID: 'left-y-axis'
       },  {
@@ -103,6 +110,7 @@ function makeStateChart(){
       }],
       labels: stateDates
     },
+    
     options: {
       maintainAspectRatio: false,
       scales:{

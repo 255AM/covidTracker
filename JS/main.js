@@ -26,41 +26,148 @@ function makeUsChart(){
     data: {
       datasets: [{
           data: usCases,
-          //this changes legend bg color
-          backgroundColor: 'rgba(121, 121, 255, 0.9)',
-          label: 'US Cases',
-          yAxisID: 'left-y-axis'
-      },  {
-          data: usDeaths,
-          //this changes legend bg color
+          drawBorder: true,
+          pointBorderColor: "",
+          pointBackgroundColor: "",
+          borderColor: 'orange',
+          borderWidth: 0,
+          pointBorderWidth: 0,
+          pointHoverRadius: 20,
+          pointHoverBackgroundColor: "darkorange",
+          pointHoverBorderColor: "",
+          pointHoverBorderWidth: 1,
+          pointRadius: 0,
+          pointHitRadius: 5,
+          pointBackgroundColor: '',
           backgroundColor: 'red',
-          label: 'US Deaths',
-          yAxisID: 'right-y-axis'
+          label: 'US Cases',
+          fill: false,
+          
+          
       }],
       labels: usDates
     },
     options: {
       maintainAspectRatio: false,
+      tooltips: {
+        enabled:true,
+        mode: 'index',
+        intersect: true
+      },
       scales:{
-        yAxes:[{
+        yAxes:[
+        {
           id: 'left-y-axis',
           type: 'linear',
-          position: 'left'
-        }, {
-          id: 'right-y-axis',
+          position: 'left',
+          ticks: {
+            display: true,
+            drawTicks: true,
+            padding: 15,
+            autoSkip: false,
+            maxTicksLimit: 5,
+            suggestedMin: 5
+
+          },
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            lineWidth: 2,
+            color: 'grey'
+          }
+        },{
+          id: 'dummyRightForFormat',
           type: 'linear',
           position: 'right',
           ticks: {
-            max:Number(usDeaths[usDeaths.length-1])*3,
-            min: 0,
-          }
-        }],
-        xAxis:[{
+            display: false,
+            drawTicks: false,
+          },
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            borderWidth: 5,
+            lineWidth: 2,
+            color: 'grey'
+            
+          },
+          layout: {
+            padding: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0
+            },
+            tooltips: {
+              enabled: false,
+              mode: 'index'
+           }
+        },
+      }
+        
+        ],
+        xAxes:[
+          {
+          id: 'date',
           type: 'time',
-          time: {
-            unit: 'month',
-                }
-        }] 
+            time: {
+              unit: 'month'
+            },
+
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            lineWidth: 2,
+            color: 'grey'
+          },
+          ticks: {
+            display: true,
+            drawTicks: false,
+            padding: 15,
+            autoSkip: false,
+            maxTicksLimit: 20,
+            
+            
+          },
+          display: true
+        },
+        {
+          id: 'dummyTopForFormat',
+          type: 'linear',
+          position: 'top',
+          ticks: {
+            display: false,
+            drawTicks: false,
+          },
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            borderWidth: 5,
+            lineWidth: 2,
+            color: 'grey'
+            
+          },
+          layout: {
+            padding: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0
+            }
+        },
+      }
+        
+
+      
+      ] 
       }
     }
   });
@@ -93,18 +200,28 @@ function makeStateChart(value){
     }
 
   window.stateChart = new Chart('stateChart', {
-    type: "bar",
+    type: "line",
     data: {
       datasets: [{
-          data: stateCases,
-          backgroundColor: 'rgba(121, 121, 255, 0.9)',
-          label: stateName + ' Cases',
-          yAxisID: 'left-y-axis'
-      },  {
-          data: stateDeaths,
-          backgroundColor: 'red',
-          label: stateName + ' Deaths',
-          yAxisID: 'right-y-axis'
+        data: stateCases,
+        drawBorder: true,
+        pointBorderColor: "",
+        pointBackgroundColor: "",
+        borderColor: 'orange',
+        borderWidth: 0,
+        pointBorderWidth: 0,
+        pointHoverRadius: 20,
+        pointHoverBackgroundColor: "darkorange",
+        pointHoverBorderColor: "",
+        pointHoverBorderWidth: 1,
+        pointRadius: 0,
+        pointHitRadius: 5,
+        pointBackgroundColor: '',
+        backgroundColor: 'red',
+        label: stateName + ' Cases',
+        fill: false,
+        label: stateName + ' Cases',
+        fill: false,
       }],
       labels: stateDates
     },
@@ -112,30 +229,122 @@ function makeStateChart(value){
     options: {
       maintainAspectRatio: false,
       scales:{
-        yAxes:[{
+        yAxes:[
+        {
           id: 'left-y-axis',
           type: 'linear',
-          position: 'left'
-        }, {
-          id: 'right-y-axis',
+          position: 'left',
+          ticks: {
+            display: true,
+            drawTicks: true,
+            padding: 15,
+            autoSkip: false,
+            maxTicksLimit: 5,
+            suggestedMin: 5
+          },
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            lineWidth: 2,
+            color: 'grey',
+          },
+          tooltips: {
+            mode: 'index'
+         }
+
+        },{
+          id: 'dummyRightForFormat',
           type: 'linear',
           position: 'right',
-            ticks: {
-              max:Number(stateDeaths[stateDeaths.length-1])*3,
-              min: 0,
-               
+          ticks: {
+            display: false,
+            drawTicks: false,
+            
+          },
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            borderWidth: 5,
+            lineWidth: 2,
+            color: 'grey'
+            
+          },
+          layout: {
+            padding: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0
             }
-        }],
-        xAxis:[{
+        },
+      }
+        
+        ],
+        xAxes:[
+          {
+          id: 'date',
           type: 'time',
-          time: {
-            unit: 'month',
-                }
-        }] 
+            time: {
+              unit: 'month'
+            },
+
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            lineWidth: 2,
+            color: 'grey'
+          },
+          ticks: {
+            display: true,
+            drawTicks: false,
+            padding: 15,
+            autoSkip: true,
+            maxTicksLimit: 20
+          },
+          display: true
+        },
+        {
+          id: 'dummyTopForFormat',
+          type: 'linear',
+          position: 'top',
+          ticks: {
+            display: false,
+            drawTicks: false,
+          },
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            borderWidth: 5,
+            lineWidth: 2,
+            color: 'grey'
+            
+          },
+          layout: {
+            padding: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0
+            }
+        },
+      }
+        
+
+      
+      ] 
       }
     }
   });
 }
+
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;

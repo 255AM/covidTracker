@@ -23,19 +23,36 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div>
-            <canvas id="usChart" width="150" height="300"></canvas>
+            <p id = "usCasesStats">
+                
+            </p>
+            <canvas id="usChart" width="1122" height="300"></canvas>
+        </div>
+        <div>
+            <canvas id="newUsCasesChart" width="1122" height="300"></canvas>
         </div>
         
         <div>
-            <canvas id="stateChart" width="122" height="300"></canvas>
+            <canvas id="usDeathsChart" width="1122" height="300"></canvas>
         </div>
-        
+        <div>
+            <canvas id="newUsDeathsChart" width="1122" height="300"></canvas>
+        </div>
         <div id = 'list'>
             <select id = "statesList" select name='type' onmousedown= "this.value = '' " ; onChange="destroyChart(); makeStateChart(this.value);"onchange= makeStateChart(this.value) ></select>
         </div>
-
         <div>
-            <canvas id="dailyNewUs" width="122" height="300"></canvas>
+            <canvas id="stateCasesChart" width="1122" height="300"></canvas>
+        </div>
+        
+        <div>
+            <canvas id="newStateCasesChart" width="1122" height="300"></canvas>
+        </div>
+        <div>
+            <canvas id="stateDeathsChart" width="1122" height="300"></canvas>
+        </div>
+        <div>
+            <canvas id="newStateDeathsChart" width="1122" height="300"></canvas>
         </div>
         
         

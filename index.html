@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Covid-19 Tracker</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
@@ -17,46 +17,69 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div>
-            <p id = "usCasesStats">
-                
-            </p>
-            <canvas id="usChart" width="1122" height="300"></canvas>
+        <h1>Covid-19 Tracker</h1>
+        <div id = allUsCases class = "grid-container">
+            <div id="usCases" class = "grid-child">
+                <h2>Us Cases</h2>
+                <p id = "usCasesSummary">uscases are baladjaf fsafj;da fdsafdsahjfkdsjaf</p>
+                <canvas id="usChart" ></canvas>
+            </div>
+            <div id="newUsCases" class = "grid-child">
+                <h2>New Us Cases</h2>
+                <p id = "newUsCasesSummary">us casdee fjsae'lfj'sad fdsal'fj'sdla fsdafjsdlajf</p>
+                <canvas id="newUsCasesChart" ></canvas>
+            </div>
         </div>
-        <div>
-            <canvas id="newUsCasesChart" width="1122" height="300"></canvas>
-        </div>
-        
-        <div>
-            <canvas id="usDeathsChart" width="1122" height="300"></canvas>
-        </div>
-        <div>
-            <canvas id="newUsDeathsChart" width="1122" height="300"></canvas>
-        </div>
-        <div id = 'list'>
-            <select id = "statesList" select name='type' onmousedown= "this.value = '' " ; onChange="destroyChart(); makeStateChart(this.value);"onchange= makeStateChart(this.value) ></select>
-        </div>
-        <div>
-            <canvas id="stateCasesChart" width="1122" height="300"></canvas>
-        </div>
-        
-        <div>
-            <canvas id="newStateCasesChart" width="1122" height="300"></canvas>
-        </div>
-        <div>
-            <canvas id="stateDeathsChart" width="1122" height="300"></canvas>
-        </div>
-        <div>
-            <canvas id="newStateDeathsChart" width="1122" height="300"></canvas>
+         
+        <div id = allUsDeaths class = "grid-container">
+            <div id="usDeaths" class="grid-child">
+                <h2>US Deaths</h2>
+                <p id = "newUsCasesSummary">us casdee fjsae'lfj'sad fdsal'fj'sdla fsdafjsdlajf</p>
+                <canvas id="usDeathsChart" ></canvas>
+            </div>
+            <div id="newUsDeaths" class="grid-child">
+                <h2>New US Deaths</h2>
+                <p id = "newUsCasesSummary">us casdee fjsae'lfj'sad fdsal'fj'sdla fsdafjsdlajf</p>
+                <canvas id="newUsDeathsChart" ></canvas>
+            </div>
         </div>
         
+        <div id = 'list-container' class = "list-container">
+            <div id = 'list' class = "list-child">
+                <select id = "statesList" select name='type' onmousedown= "this.value = '' " ; onChange="destroyChart(); makeStateChart(this.value);"onchange= makeStateChart(this.value) ></select>
+            </div>
+        </div>
         
-
+        <div id = "allStateCases" class = "grid-container">
+            <div id="stateCases" class='grid-child'>
+                <h2>State Cases</h2>
+                <p id = "stateCasesSummary">fdsajklfdsa fsadlkfjdsa f sdlkafjklaforweajflsdma</p>
+                <canvas id="stateCasesChart" ></canvas>
+            </div>
+            <div id= 'newStateCases' class = "grid-child">
+                <h2>New State Cases</h2>
+                <p id = "newStateCasesSummary">fdsajklfdsa fsadlkfjdsa f sdlkafjklaforweajflsdma</p>
+                <canvas id="newStateCasesChart" ></canvas>
+            </div>
+        </div>
+        <div id='allStateDeaths '  class = "grid-container">
+            <div id = 'stateDeaths' class = "grid-child">
+                <h2>State Deaths</h2>
+                <p id = "stateDeathsSummary"> fdisaljfidlsaj fjd'salfjlkdsjafl</p>
+                <canvas id="stateDeathsChart" ></canvas>
+            </div>
+            <div id= 'newStateDeaths' class = "grid-child">
+                <h2>New State Deaths</h2>
+                <p id= newStateDeathsSummary>jfdlksafjd fjkdlajfkdljsaf fjsadfkl'jdsa</p>
+                <canvas id="newStateDeathsChart" ></canvas>
+            </div>
+        </div>
         
         <script src="js/main.js" async defer></script>
     </body>

@@ -32,15 +32,19 @@ function makeUsChart(){
       newUsDeaths.push(usDeaths[index] - usDeaths[index - 1])
     } 
 
-    mostRecent(usDeaths)
-
-    lastReportedUsDate = usDates[Object.keys(usDates)[Object.keys(usDates).length - 1]]
-  
-
+    let mostRecentUsDeaths = mostRecent(usDeaths)
+    let mostRecentUsCases = mostRecent(usCases)
+    let mostRecentNewUsCases = mostRecent(newUsCases)
+    let mostRecentNewUsDeaths = mostRecent(newUsDeaths)
+    let mostRecentUsDates = mostRecent(usDates)
 
   
  
  //**************************************************************Chart Of US Cases **********************************************************************//
+
+ console.log( 'As of ' +  mostRecentUsDates + ', ' + mostRecentUsCases + ' cases have been reported in the US')
+   
+
   var usChart = new Chart('usChart', {
     type: "line",
     data: {
@@ -194,6 +198,10 @@ function makeUsChart(){
 
   //**************************************************************Chart Of New US Cases **********************************************************************//
 
+  console.log( 'On ' +  mostRecentUsDates + ', ' + mostRecentNewUsCases + ' new cases were reported in the US')
+  //console.log( 'As of  ' +  mostRecentUsDates + ', ' + 'the seven day running average of new cases in the US is '  + newUsCaseseSevenDay)
+
+
   window.newUsCasesChart = new Chart('newUsCasesChart', {
     type: "line",
     data: {
@@ -338,6 +346,10 @@ function makeUsChart(){
     }
   });
   //**************************************************************Chart Of US Deaths **********************************************************************//
+
+  console.log( 'As of ' +  mostRecentUsDates + ', ' + mostRecentUsDeaths + ' deaths have been reported in the US')
+   
+
   usDeathsChart = new Chart('usDeathsChart', {
     type: "line",
     data: {
@@ -483,6 +495,10 @@ function makeUsChart(){
   });
 
   //**************************************************************Chart Of Daily Reported US Deaths **********************************************************************//
+
+  console.log( 'On ' +  mostRecentUsDates + ', ' + mostRecentNewUsDeaths + ' new deaths were reported in the US')
+  //console.log( 'As of  ' +  mostRecentUsDates + ', ' + 'the seven day running average of deaths reported daily in the US is '  + newUsDeathsSevenDay)
+
 window.newUsDeathsChart = new Chart('newUsDeathsChart', {
   type: "line",
   data: {
@@ -647,6 +663,7 @@ function makeStateChart(value){
   stateName = value
   usStates = allStateData.map(function(d) {return d.state})
   uniqueStates = usStates.filter(onlyUnique).sort(); 
+  
 
   
   let stateSelector = uniqueStates;     
@@ -661,14 +678,19 @@ function makeStateChart(value){
   for (index = 1 ; index <= stateCases.length-1; index++){
        newStateCases.push(stateCases[index] - stateCases[index - 1])
     } 
-
   let newStateDeaths = []  
   for (index = 1 ; index <= stateDeaths.length-1; index++){
         newStateDeaths.push(stateDeaths[index] - stateDeaths[index - 1])
     } 
+
+    let mostRecentStateDeaths = mostRecent(stateDeaths)
+    let mostRecentStateCases = mostRecent(stateCases)
+    let mostRecentNewStateCases = mostRecent(newStateCases)
+    let mostRecentNewStateDeaths = mostRecent(newStateDeaths)
+    let mostRecentStateDates = mostRecent(stateDates)
     
-  
-  
+  console.log( 'As of ' +  mostRecentStateDates + ', ' + mostRecentStateCases + ' cases have been reported in ' + stateName)
+   
     window.stateCasesChart = new Chart('stateCasesChart', {
       type: "line",
       data: {
@@ -812,8 +834,12 @@ function makeStateChart(value){
         }
       }
     });
+    
 
 //**************************************************************Chart Of Daily State Cases **********************************************************************//
+
+console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' new cases were reported in ' + stateName)
+//console.log( 'As of  ' +  mostRecentStateDates + ', ' + 'the seven day running average of new cases in ' + stateName + ' is'  +  newStateCaseseSevenDay)
 
   window.newStateCasesChart = new Chart('newStateCasesChart', {
     type: "line",
@@ -962,6 +988,8 @@ function makeStateChart(value){
 
   //**************************************************************Chart Of State Deaths **********************************************************************//
 
+  console.log( 'As of ' +  mostRecentStateDates + ', ' + mostRecentStateDeaths + ' deaths have been reported in ' + stateName)
+
   stateDeathsChart = new Chart('stateDeathsChart', {
     type: "line",
     data: {
@@ -1107,6 +1135,9 @@ function makeStateChart(value){
   });
 
   //**************************************************************Chart Of New State deaths **********************************************************************//
+
+  console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateDeaths + ' new Deaths were reported in ' + stateName)
+  //console.log( 'As of  ' +  mostRecentStateDates + ', ' + 'the seven day running average of new cases in ' + stateName + ' is'  +  newStateDeathsSevenDay + ' cases)
 
   window.newStateDeathsChart = new Chart('newStateDeathsChart', {
     type: "line",
@@ -1271,5 +1302,5 @@ function destroyChart(){
 
 
 function mostRecent(array){
-  console.log(array[Object.keys(array)[Object.keys(array).length - 1]])
+  return array[Object.keys(array)[Object.keys(array).length - 1]]
 }

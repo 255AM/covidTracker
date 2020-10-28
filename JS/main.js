@@ -90,7 +90,8 @@ function makeUsChart(){
             padding: 15,
             autoSkip: false,
             maxTicksLimit: 5,
-            suggestedMin: 5
+            suggestedMin: 5,
+            beginAtZero: true
 
           },
           gridLines: {
@@ -198,9 +199,12 @@ function makeUsChart(){
 
   //**************************************************************Chart Of New US Cases **********************************************************************//
 
-  console.log( 'On ' +  mostRecentUsDates + ', ' + mostRecentNewUsCases + ' new cases were reported in the US')
+  //console.log( 'On ' +  mostRecentUsDates + ', ' + mostRecentNewUsCases + ' new cases were reported in the US')
   //console.log( 'As of  ' +  mostRecentUsDates + ', ' + 'the seven day running average of new cases in the US is '  + newUsCaseseSevenDay)
-
+  document.getElementById("usCasesSummary").textContent= `As of ${mostRecentUsDates}, the number of US reported cases is up to ${mostRecentUsCases}.`
+  document.getElementById("usNewCasesSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsCases} new cases reported in the US`
+  document.getElementById("usDeathsSummary").textContent= `As of ${mostRecentUsDates}, its reported that ${mostRecentUsDeaths} people have died in the US.`
+  document.getElementById("usNewDeathsSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsDeaths} new deaths reported in the US.`
 
   window.newUsCasesChart = new Chart('newUsCasesChart', {
     type: "line",
@@ -242,7 +246,8 @@ function makeUsChart(){
             padding: 15,
             autoSkip: false,
             maxTicksLimit: 5,
-            suggestedMin: 5
+            suggestedMin: 5,
+            beginAtZero: true
           },
           gridLines: {
             display: true,
@@ -390,7 +395,8 @@ function makeUsChart(){
             padding: 15,
             autoSkip: false,
             maxTicksLimit: 5,
-            suggestedMin: 5
+            suggestedMin: 5,
+            beginAtZero: true
           },
           gridLines: {
             display: true,
@@ -539,7 +545,8 @@ window.newUsDeathsChart = new Chart('newUsDeathsChart', {
           padding: 15,
           autoSkip: false,
           maxTicksLimit: 5,
-          suggestedMin: 5
+          suggestedMin: 5,
+          beginAtZero: true
         },
         gridLines: {
           display: true,
@@ -688,8 +695,13 @@ function makeStateChart(value){
     let mostRecentNewStateCases = mostRecent(newStateCases)
     let mostRecentNewStateDeaths = mostRecent(newStateDeaths)
     let mostRecentStateDates = mostRecent(stateDates)
+
+    document.getElementById("stateCasesSummary").textContent= `As of ${mostRecentStateDates}, the number of cases reported in ${stateName} is up to ${mostRecentStateCases}.`
+    document.getElementById("newStateCasesSummary").textContent= `On ${mostRecentStateDates}, there were ${mostRecentNewStateCases} new cases reported in ${stateName}`
+    document.getElementById("stateDeathsSummary").textContent= `As of ${mostRecentStateDates}, its reported that ${mostRecentStateDeaths} people have died in ${stateName}.`
+    document.getElementById("newStateDeathsSummary").textContent= `On ${mostRecentStateDates}, there were ${mostRecentNewStateDeaths} new deaths reported in ${stateName}.`
     
-  console.log( 'As of ' +  mostRecentStateDates + ', ' + mostRecentStateCases + ' cases have been reported in ' + stateName)
+  
    
     window.stateCasesChart = new Chart('stateCasesChart', {
       type: "line",
@@ -731,7 +743,8 @@ function makeStateChart(value){
               padding: 15,
               autoSkip: false,
               maxTicksLimit: 5,
-              suggestedMin: 5
+              suggestedMin: 5,
+              beginAtZero: true
             },
             gridLines: {
               display: true,
@@ -860,8 +873,7 @@ console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' 
         pointHitRadius: 5,
         pointBackgroundColor: '',
         backgroundColor: 'red',
-        label: stateName + ' Cases',
-        fill: false,
+        
         label: stateName + ' Daily Reported Cases',
         fill: false,
       }],
@@ -882,7 +894,8 @@ console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' 
             padding: 15,
             autoSkip: false,
             maxTicksLimit: 5,
-            suggestedMin: 5
+            suggestedMin: 5,
+            beginAtZero: true
           },
           gridLines: {
             display: true,
@@ -1030,7 +1043,8 @@ console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' 
             padding: 15,
             autoSkip: false,
             maxTicksLimit: 5,
-            suggestedMin: 5
+            suggestedMin: 5,
+            beginAtZero: true
           },
           gridLines: {
             display: true,
@@ -1178,9 +1192,10 @@ console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' 
             display: true,
             drawTicks: true,
             padding: 15,
-            autoSkip: false,
+            autoSkip: true,
             maxTicksLimit: 5,
-            suggestedMin: 5
+            suggestedMin: 5,
+            beginAtZero: true
           },
           gridLines: {
             display: true,
@@ -1189,6 +1204,7 @@ console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' 
             drawOnChartArea: false,
             lineWidth: 2,
             color: 'grey',
+            
           },
           tooltips: {
             mode: 'index'

@@ -23,63 +23,77 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <h1>Covid-19 Tracker</h1>
-        <div id = allUsCases class = "grid-container">
-            <div id="usCases" class = "grid-child">
-                <h2>Us Cases</h2>
-                <h3><p id = "usCasesSummary"><strong>   </strong></p></h3>
-                <canvas id="usChart" ></canvas>
-            </div>
-            <div id="newUsCases" class = "grid-child">
-                <h2>New Us Cases</h2>
-                <h3><p id = "usNewCasesSummary">us casdee fjsae'lfj'sad fdsal'fj'sdla fsdafjsdlajf</p></h3>
-                <canvas id="newUsCasesChart" ></canvas>
-            </div>
-        </div>
-         
-        <div id = allUsDeaths class = "grid-container">
-            <div id="usDeaths" class="grid-child">
-                <h2>US Deaths</h2>
-                <h3><p id = "usDeathsSummary">us casdee fjsae'lfj'sad fdsal'fj'sdla fsdafjsdlajf</p></h3>
-                <canvas id="usDeathsChart" ></canvas>
-            </div>
-            <div id="newUsDeaths" class="grid-child">
-                <h2>New US Deaths</h2>
-                <h3><p id = "usNewDeathsSummary">us casdee fjsae'lfj'sad fdsal'fj'sdla fsdafjsdlajf</p></h3>
-                <canvas id="newUsDeathsChart" ></canvas>
-            </div>
-        </div>
+
         
-        <div id = 'list-container' class = "list-container">
-            <div id = 'list' class = "list-child">
-                <select id = "statesList" select name='type' onmousedown= "this.value = '' " ; onChange="destroyChart(); makeStateChart(this.value);"onchange= makeStateChart(this.value) ></select>
-            </div>
-        </div>
         
-        <div id = "allStateCases" class = "grid-container">
-            <div id="stateCases" class='grid-child'>
-                <h2>State Cases</h2>
-                <h3><p id = "stateCasesSummary">fdsajklfdsa fsadlkfjdsa f sdlkafjklaforweajflsdma</p></h3>
-                <canvas id="stateCasesChart" ></canvas>
+            
+            <div class = 'wrapper'>   
+                <div id ='title' class = 'title'><h1><p id="title">Covid-19 Tracker</h1></p></div> 
+             
+                <div class = "row">
+                    <div class = "column">
+                        <div class = "red-column">
+                            <div id="usCases" class = "grid-child1"><p id = "usCasesSummary">also, ive got something to say</p><canvas id="usChart" ></canvas></div>
+                        </div>
+                    </div>
+                    <div class = "column">
+                        <div class = "blue-column">
+                            <div id="newUsCases" class = "grid-child2"><p id = "usNewCasesSummary">also, ive got something to say</p> <canvas id="newUsCasesChart" ></canvas></div>
+                        </div>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "column">
+                        <div class = "red-column">
+                            <div id="usDeaths" class="grid-child3"><p id = "usDeathsSummary">also, ive got something to say</p><canvas id="usDeathsChart" ></canvas></div>
+                        </div>
+                    </div>
+                    <div class = "column">
+                        <div class = "blue-column">
+                            <div id="newUsDeaths" class="grid-child4"><p id = "usNewDeathsSummary">also, ive got something to say</p><canvas id="newUsDeathsChart" ></canvas></div>
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div id = 'list-container' class = "list-container">
+                <div id = 'list' class = "list-child">
+                    <select id = "statesList" select name='type' onmousedown= "this.value = '' " ; onChange="destroyChart(); makeStateChart(this.value);"onchange= makeStateChart(this.value) ></select>
+                </div>
             </div>
-            <div id= 'newStateCases' class = "grid-child">
-                <h2>New State Cases</h2>
-                <h3><p id = "newStateCasesSummary">fdsajklfdsa fsadlkfjdsa f sdlkafjklaforweajflsdma</p></h3>
-                <canvas id="newStateCasesChart" ></canvas>
-            </div>
-        </div>
-        <div id='allStateDeaths '  class = "grid-container">
-            <div id = 'stateDeaths' class = "grid-child">
-                <h2>State Deaths</h2>
-                <h3><p id = "stateDeathsSummary"> fdisaljfidlsaj fjd'salfjlkdsjafl</p></h3>
-                <canvas id="stateDeathsChart" ></canvas>
-            </div>
-            <div id= 'newStateDeaths' class = "grid-child">
-                <h2>New State Deaths</h2>
-                <h3><p id= newStateDeathsSummary>jfdlksafjd fjkdlajfkdljsaf fjsadfkl'jdsa</p></h3>
-                <canvas id="newStateDeathsChart" ></canvas>
-            </div>
-        </div>
+            
+            
+                <div class = "row">
+                    <div class = "column">
+                        <div class = "red-column">
+                            <div id="stateCases" class='grid-child5'><p id = "stateCasesSummary">also, ive got something to say</p><canvas id="stateCasesChart" ></canvas></div>
+                        </div>
+                    </div>
+                    <div class = "column">
+                        <div class="blue-column">
+                            <div id= 'newStateCases' class = "grid-child6"><p id = "newStateCasesSummary">also, ive got something to say</p><canvas id="newStateCasesChart" ></canvas></div>
+                        </div>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "column">
+                        <div class="red-column">
+                            <div id = 'stateDeaths' class = "grid-child7"><p id = "stateDeathsSummary">also, ive got something to say</p><canvas id="stateDeathsChart" ></canvas></div>
+                        </div>
+                    </div>
+                    <div class = "column">
+                        <div class="blue-column">
+                            <div id= 'newStateDeaths' class = "grid-child8"><p id = "newStateDeathsSummary">also, ive got something to say</p><canvas id="newStateDeathsChart" ></canvas></div>
+                        </div>
+                     </div>
+                </div>
+            
+            
+                
+                
+            
+        </div>    
+        
         
         <script src="js/main.js" async defer></script>
     </body>

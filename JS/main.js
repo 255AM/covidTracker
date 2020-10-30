@@ -72,7 +72,8 @@ function makeUsChart(){
       labels: usDates
     },
     options: {
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
+      responsive: true,
       tooltips: {
         enabled:true,
         mode: 'index',
@@ -233,7 +234,8 @@ function makeUsChart(){
     },
     
     options: {
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
+      responsive: true,
       scales:{
         yAxes:[
         {
@@ -382,7 +384,8 @@ function makeUsChart(){
     },
     
     options: {
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
+      responsive: true,
       scales:{
         yAxes:[
         {
@@ -532,7 +535,8 @@ window.newUsDeathsChart = new Chart('newUsDeathsChart', {
   },
   
   options: {
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
+    responsive: true,
     scales:{
       yAxes:[
       {
@@ -673,13 +677,16 @@ function makeStateChart(value){
   
 
   
-  let stateSelector = uniqueStates;     
-  let sel = document.getElementById('statesList');
-    for(let i = 0; i < uniqueStates.length; i++) {
-      let opt = document.createElement('option');
-      opt.innerHTML = uniqueStates[i];
-      opt.value = uniqueStates[i];
-      sel.appendChild(opt);
+  //let stateSelector = uniqueStates;
+    let sel = document.getElementById('statesList');
+      if (sel.length == 0){
+      for(let i = 0; i < uniqueStates.length; i++) {
+        let opt = document.createElement('option');
+        opt.innerHTML = uniqueStates[i];
+        opt.value = uniqueStates[i];
+        console.log(sel.length)
+        sel.appendChild(opt);
+      }
     }
   let newStateCases = []  
   for (index = 1 ; index <= stateCases.length-1; index++){
@@ -730,7 +737,8 @@ function makeStateChart(value){
       },
       
       options: {
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
+        responsive: true,
         scales:{
           yAxes:[
           {
@@ -881,7 +889,8 @@ console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' 
     },
     
     options: {
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
+      responsive: true,
       scales:{
         yAxes:[
         {
@@ -1030,7 +1039,8 @@ console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' 
     },
     
     options: {
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
+      responsive: true,
       scales:{
         yAxes:[
         {
@@ -1181,7 +1191,8 @@ console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' 
     },
     
     options: {
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
+      responsive: true,
       scales:{
         yAxes:[
         {

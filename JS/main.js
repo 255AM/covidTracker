@@ -32,17 +32,17 @@ function makeUsChart(){
       newUsDeaths.push(usDeaths[index] - usDeaths[index - 1])
     } 
 
-    let mostRecentUsDeaths = mostRecent(usDeaths)
-    let mostRecentUsCases = mostRecent(usCases)
-    let mostRecentNewUsCases = mostRecent(newUsCases)
-    let mostRecentNewUsDeaths = mostRecent(newUsDeaths)
+    let mostRecentUsDeaths = numberWithCommas(mostRecent(usDeaths))
+    let mostRecentUsCases = numberWithCommas(mostRecent(usCases))
+    let mostRecentNewUsCases = numberWithCommas(mostRecent(newUsCases))
+    let mostRecentNewUsDeaths = numberWithCommas(mostRecent(newUsDeaths))
     let mostRecentUsDates = mostRecent(usDates)
 
   
  
  //**************************************************************Chart Of US Cases **********************************************************************//
 
- console.log( 'As of ' +  mostRecentUsDates + ', ' + mostRecentUsCases + ' cases have been reported in the US')
+ 
    
 
   var usChart = new Chart('usChart', {
@@ -64,7 +64,7 @@ function makeUsChart(){
           pointHitRadius: 5,
           pointBackgroundColor: '',
           backgroundColor: 'red',
-          label: 'US Cases',
+          label: 'U.S. total cases',
           fill: false,
           
           
@@ -200,12 +200,11 @@ function makeUsChart(){
 
   //**************************************************************Chart Of New US Cases **********************************************************************//
 
-  //console.log( 'On ' +  mostRecentUsDates + ', ' + mostRecentNewUsCases + ' new cases were reported in the US')
-  //console.log( 'As of  ' +  mostRecentUsDates + ', ' + 'the seven day running average of new cases in the US is '  + newUsCaseseSevenDay)
-  document.getElementById("usCasesSummary").textContent= `As of ${mostRecentUsDates}, the number of US reported cases is up to ${mostRecentUsCases}.`
-  document.getElementById("usNewCasesSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsCases} new cases reported in the US`
-  document.getElementById("usDeathsSummary").textContent= `As of ${mostRecentUsDates}, its reported that ${mostRecentUsDeaths} people have died in the US.`
-  document.getElementById("usNewDeathsSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsDeaths} new deaths reported in the US.`
+
+  document.getElementById("usCasesSummary").textContent= `As of ${mostRecentUsDates}, the number of U.S. reported cases is up to ${mostRecentUsCases}.`
+  document.getElementById("usNewCasesSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsCases} new cases reported in the U.S.`
+  document.getElementById("usDeathsSummary").textContent= `As of ${mostRecentUsDates}, its reported that ${mostRecentUsDeaths} people have died in the U.S.`
+  document.getElementById("usNewDeathsSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsDeaths} new deaths reported in the U.S.`
 
   window.newUsCasesChart = new Chart('newUsCasesChart', {
     type: "line",
@@ -226,7 +225,7 @@ function makeUsChart(){
         pointHitRadius: 5,
         pointBackgroundColor: '',
         backgroundColor: 'red',
-        label: ' New US Reported Cases',
+        label: ' Daily U.S. reported cases',
         fill: false,
         
       }],
@@ -376,7 +375,7 @@ function makeUsChart(){
         pointHitRadius: 5,
         pointBackgroundColor: '',
         backgroundColor: 'red',
-        label: 'US Deaths',
+        label: 'Total U.S. deaths',
         fill: false,
         
       }],
@@ -527,7 +526,7 @@ window.newUsDeathsChart = new Chart('newUsDeathsChart', {
       pointHitRadius: 5,
       pointBackgroundColor: '',
       backgroundColor: 'red',
-      label: ' Daily US Reported Deaths',
+      label: ' Daily U.S. reported deaths',
       fill: false,
       
     }],
@@ -697,10 +696,10 @@ function makeStateChart(value){
         newStateDeaths.push(stateDeaths[index] - stateDeaths[index - 1])
     } 
 
-    let mostRecentStateDeaths = mostRecent(stateDeaths)
-    let mostRecentStateCases = mostRecent(stateCases)
-    let mostRecentNewStateCases = mostRecent(newStateCases)
-    let mostRecentNewStateDeaths = mostRecent(newStateDeaths)
+    let mostRecentStateDeaths = numberWithCommas(mostRecent(stateDeaths))
+    let mostRecentStateCases = numberWithCommas(mostRecent(stateCases))
+    let mostRecentNewStateCases = numberWithCommas(mostRecent(newStateCases))
+    let mostRecentNewStateDeaths = numberWithCommas(mostRecent(newStateDeaths))
     let mostRecentStateDates = mostRecent(stateDates)
 
     document.getElementById("stateCasesSummary").textContent= `As of ${mostRecentStateDates}, the number of cases reported in ${stateName} is up to ${mostRecentStateCases}.`
@@ -729,7 +728,7 @@ function makeStateChart(value){
           pointHitRadius: 5,
           pointBackgroundColor: '',
           backgroundColor: 'red',
-          label: stateName + ' Cases',
+          label: stateName + ' total cases',
           fill: false,
           
         }],
@@ -882,7 +881,7 @@ console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' 
         pointBackgroundColor: '',
         backgroundColor: 'red',
         
-        label: stateName + ' Daily Reported Cases',
+        label: stateName + ' daily reported cases',
         fill: false,
       }],
       labels: stateDates
@@ -1031,7 +1030,7 @@ console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' 
         pointHitRadius: 5,
         pointBackgroundColor: '',
         backgroundColor: 'red',
-        label: stateName + ' Deaths',
+        label: stateName + ' total deaths',
         fill: false,
         
       }],
@@ -1182,9 +1181,7 @@ console.log( 'On ' +  mostRecentStateDates + ', ' + mostRecentNewStateCases + ' 
         pointHitRadius: 5,
         pointBackgroundColor: '',
         backgroundColor: 'red',
-        label: stateName + ' Cases',
-        fill: false,
-        label: stateName + ' Daily reported Deaths',
+        label: stateName + ' daily reported deaths',
         fill: false,
       }],
       labels: stateDates
@@ -1330,4 +1327,8 @@ function destroyChart(){
 
 function mostRecent(array){
   return array[Object.keys(array)[Object.keys(array).length - 1]]
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }

@@ -1,3 +1,15 @@
+body{
+    background-color: seashell;
+}
+.title{
+    height: 100%;
+    Width: 100%;
+    background-color: lightgrey;
+    text-align: center;
+    padding: 5px;
+    
+
+}
 .row{
     display:flex;
     text-align: center;

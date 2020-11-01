@@ -204,7 +204,7 @@ function makeUsChart(){
 
   document.getElementById("usCasesSummary").textContent= `As of ${mostRecentUsDates}, the number of U.S. reported cases is up to ${mostRecentUsCases}.`
   document.getElementById("usNewCasesSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsCases} new cases reported in the U.S.`
-  document.getElementById("usDeathsSummary").textContent= `As of ${mostRecentUsDates}, its reported that ${mostRecentUsDeaths} people have died in the U.S.`
+  document.getElementById("usDeathsSummary").textContent= `As of ${mostRecentUsDates},  ${mostRecentUsDeaths} people have died in the U.S.`
   document.getElementById("usNewDeathsSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsDeaths} new deaths reported in the U.S.`
 
   window.newUsCasesChart = new Chart('newUsCasesChart', {
@@ -701,9 +701,9 @@ function makeStateChart(value){
 
     
     
-    document.getElementById("stateCasesSummary").textContent= `As of ${mostRecentStateDates}, the number of cases reported in ${stateName} is up to ${mostRecentStateCases}.`
+    document.getElementById("stateCasesSummary").textContent= `As of ${mostRecentStateDates}, there were ${mostRecentStateCases} cases reported in ${stateName}.`
     document.getElementById("newStateCasesSummary").textContent= `On ${mostRecentStateDates}, there were ${mostRecentNewStateCases} new cases reported in ${stateName}`
-    document.getElementById("stateDeathsSummary").textContent= `As of ${mostRecentStateDates}, its reported that ${mostRecentStateDeaths} people have died in ${stateName}.`
+    document.getElementById("stateDeathsSummary").textContent= `As of ${mostRecentStateDates}, ${mostRecentStateDeaths} people have died in ${stateName}.`
     document.getElementById("newStateDeathsSummary").textContent= `On ${mostRecentStateDates}, there were ${mostRecentNewStateDeaths} new deaths reported in ${stateName}.`
     
   

@@ -16,7 +16,6 @@ d3.csv(usCsv, function(data) {
 
 d3.csv(stateCsv, function(data) {
   allStateData.push(data)
-  console.log('incsv')
 }).then(makeStateChart)
 
 function makeUsChart(){
@@ -668,7 +667,7 @@ function makeStateChart(value){
   stateName = value
   usStates = allStateData.map(function(d) {return d.state})
   uniqueStates = usStates.filter(onlyUnique).sort(); 
-  console.log('inmakestatechartfunct')
+  
 
   
   //let stateSelector = uniqueStates;
@@ -999,7 +998,7 @@ function makeStateChart(value){
   });
 
   //**************************************************************Chart Of State Deaths **********************************************************************//
-  console.log('inchartstatedeath')
+
   stateDeathsChart = new Chart('stateDeathsChart', {
     type: "line",
     data: {
@@ -1148,7 +1147,7 @@ function makeStateChart(value){
 
   //**************************************************************Chart Of New State deaths **********************************************************************//
 
-  console.log('inchartnewsatedeath')
+  
   window.newStateDeathsChart = new Chart('newStateDeathsChart', {
     type: "line",
     data: {
@@ -1304,13 +1303,9 @@ function onlyUnique(value, index, self) {
 }
 
 function destroyChart(){
-    console.log('state')
   window.stateCasesChart.destroy()
-    console.log('newstate')
   window.newStateCasesChart.destroy()
-  console.log('ndeathstate')
   window.stateDeathsChart.destroy()
-  console.log('newdeathstate')
   window.newStateDeathsChart.destroy()
   
 }

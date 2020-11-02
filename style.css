@@ -2,13 +2,17 @@ body{
     background-color: seashell;
 }
 .title{
-    background-color: lightgrey;
+    background-color: rgb(177, 136, 136);
     text-align: center;
-    padding: 2rem;
+    padding: 4rem;
+    color: rgb(27, 27, 27);
 }
 .row{
     
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
+    padding: 4rem;
+    
 }
+
 

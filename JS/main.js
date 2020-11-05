@@ -1,7 +1,7 @@
 
 const usCsv = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv"
 const stateCsv = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
-const countyCsv = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
+
 let usData = []
 let allStateData = []
 let countyData = []
@@ -10,10 +10,10 @@ let uniqueStates = []
 let x = 0
 let lastReportedUsDate = x
 
+
+//bring in data from remote csv using d3 library
 d3.csv(usCsv, function(data) {
   usData.push(data)
-  
-
 }).then(makeUsChart)
 
 d3.csv(stateCsv, function(data) {
@@ -64,13 +64,13 @@ function makeUsChart(){
 
   }
   
-//*********************************************************************************************************************************************************//
-//**************************************************************Chart Of State Cases **********************************************************************//
-//*********************************************************************************************************************************************************//
+//********************************************************************************************************************************************//
+    //*****************************************************beginning of state charts******************************************************//
+        //***************************************************************************************************************************//
 function makeStateChart(value){
-  console.log('im at make state chart')
+  // alabama to be first chart drawn on load
   if (x==0){value = 'Alabama'; x=+1}
-  
+  // pull out data based on the identifying key (fip number) of the state
   selectedStateData = []
   for (index = 0 ; index <= allStateData.length-1; index++){
       if (allStateData[index].state == value){
@@ -84,9 +84,7 @@ function makeStateChart(value){
   usStates = allStateData.map(function(d) {return d.state})
   uniqueStates = usStates.filter(onlyUnique).sort(); 
   
-
-  
-  //let stateSelector = uniqueStates;
+    //populate the dropdown selector box with 1 of each state
     let sel = document.getElementById('statesList');
       if (sel.length == 0){
       for(let i = 0; i < uniqueStates.length; i++) {
@@ -104,26 +102,17 @@ function makeStateChart(value){
   for (index = 1 ; index <= stateDeaths.length-1; index++){
         newStateDeaths.push(stateDeaths[index] - stateDeaths[index - 1])
     } 
-
-
-    
-
-
     let mostRecentStateDeaths = numberWithCommas(mostRecent(stateDeaths))
     let mostRecentStateCases = numberWithCommas(mostRecent(stateCases))
     let mostRecentNewStateCases = numberWithCommas(mostRecent(newStateCases))
     let mostRecentNewStateDeaths = numberWithCommas(mostRecent(newStateDeaths))
     let mostRecentStateDates = mostRecent(stateDates)
 
-    
-    
     document.getElementById("stateCasesSummary").textContent= `As of ${mostRecentStateDates}, there were ${mostRecentStateCases} cases reported in ${stateName}.`
     document.getElementById("newStateCasesSummary").textContent= `On ${mostRecentStateDates}, there were ${mostRecentNewStateCases} new cases reported in ${stateName}`
     document.getElementById("stateDeathsSummary").textContent= `As of ${mostRecentStateDates}, ${mostRecentStateDeaths} people have died in ${stateName}.`
     document.getElementById("newStateDeathsSummary").textContent= `On ${mostRecentStateDates}, there were ${mostRecentNewStateDeaths} new deaths reported in ${stateName}.`
-    
-    
-   
+    //Define and create all state charts
     window.stateCasesChart = new Chart('stateCasesChart', {
       type: "line",
       data: {
@@ -262,15 +251,10 @@ function makeStateChart(value){
               }
           },
         }
-          
-  
-        
         ] 
         }
       }
     });
-    
-
     //**************************************************************Chart Of Daily State Cases **********************************************************************//
 
     window.newStateCasesChart = new Chart('newStateCasesChart', {
@@ -411,15 +395,11 @@ function makeStateChart(value){
             }
         },
       }
-        
-
-      
       ] 
       }
     }
   });
-
-  //**************************************************************Chart Of State Deaths **********************************************************************//
+    //**************************************************************Chart Of State Deaths **********************************************************************//
 
   stateDeathsChart = new Chart('stateDeathsChart', {
     type: "line",
@@ -559,17 +539,12 @@ function makeStateChart(value){
             }
         },
       }
-        
-
-      
-      ] 
+     ] 
       }
     }
   });
 
-  //**************************************************************Chart Of New State deaths **********************************************************************//
-
-  
+    //**************************************************************Chart Of New State deaths **********************************************************************//
   window.newStateDeathsChart = new Chart('newStateDeathsChart', {
     type: "line",
     data: {
@@ -708,22 +683,16 @@ function makeStateChart(value){
             }
         },
       }
-        
-
-      
       ] 
       }
     }
   });
 }  
-  
-  
-
-
+ 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
-
+//method to clear state charts after selecting a new state
 function destroyChart(chartToDestroy){
   
   window.stateCasesChart.destroy()
@@ -731,7 +700,7 @@ function destroyChart(chartToDestroy){
   window.stateDeathsChart.destroy()
   window.newStateDeathsChart.destroy()
 }
-
+//function defined to create US charts
 function drawChart(chartName, htmlElement, yData, lineColor, hoverColor, label, xData){
 
   var chartName = new Chart(htmlElement, {
@@ -887,13 +856,11 @@ function drawChart(chartName, htmlElement, yData, lineColor, hoverColor, label, 
     }
   });
 }
-
-
-
+//function to grab 'most recent' numberWithCommas. Dates, cases, deaths
 function mostRecent(array){
   return array[Object.keys(array)[Object.keys(array).length - 1]]
 }
-
+// add commas to number for readability
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }

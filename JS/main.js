@@ -12,13 +12,17 @@ let lastReportedUsDate = x
 
 d3.csv(usCsv, function(data) {
   usData.push(data)
+  
+
 }).then(makeUsChart)
 
 d3.csv(stateCsv, function(data) {
   allStateData.push(data)
+  //console.log('im here state')
 }).then(makeStateChart)
 
 function makeUsChart(){
+  console.log('imhere makesUdchart')
   usDates = usData.map(function(d) {return d.date})
   usCases = usData.map(function(d) {return d.cases})
   usDeaths = usData.map(function(d) {return d.deaths})
@@ -39,620 +43,32 @@ function makeUsChart(){
     let mostRecentNewUsDeaths = numberWithCommas(mostRecent(newUsDeaths))
     let mostRecentUsDates = mostRecent(usDates)
 
-  
- 
- //**************************************************************Chart Of US Cases **********************************************************************//
-
- 
    
+ 
+ 
+ drawChart(usChart, 'usChart', usCases, 'orange', 'darkorange', 'Us Reported Cases', usDates)
+ drawChart(newUsCasesChart, 'newUsCasesChart', newUsCases, 'purple', 'darkpurple', 'Daily Us Reported Cases', usDates) 
+ drawChart(usDeathsChart, 'usDeathsChart', usDeaths, 'red', 'darkred', ' Total U.S. Deaths', usDates)
+ drawChart(window.newUsDeathsChart, 'newUsDeathsChart', newUsDeaths, 'maroon', 'darkmaroon', ' Daily U.S. reported deaths', usDates)
+ 
 
-  var usChart = new Chart('usChart', {
-    type: "line",
-    data: {
-      datasets: [{
-          data: usCases,
-          drawBorder: true,
-          pointBorderColor: "",
-          pointBackgroundColor: "",
-          borderColor: 'orange',
-          borderWidth: 0,
-          pointBorderWidth: 0,
-          pointHoverRadius: 20,
-          pointHoverBackgroundColor: "darkorange",
-          pointHoverBorderColor: "",
-          pointHoverBorderWidth: 1,
-          pointRadius: 0,
-          pointHitRadius: 5,
-          pointBackgroundColor: '',
-          backgroundColor: 'red',
-          label: 'U.S. total cases',
-          fill: false,
-          
-          
-      }],
-      labels: usDates
-    },
-    options: {
-      maintainAspectRatio: true,
-      responsive: true,
-      tooltips: {
-        enabled:true,
-        mode: 'index',
-        intersect: true
-      },
-      scales:{
-        yAxes:[
-        {
-          id: 'left-y-axis',
-          type: 'linear',
-          position: 'left',
-          ticks: {
-            display: true,
-            drawTicks: true,
-            padding: 15,
-            autoSkip: false,
-            maxTicksLimit: 5,
-            suggestedMin: 5,
-            beginAtZero: true
+  console.log('drw chart')
 
-          },
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            lineWidth: 2,
-            color: 'grey'
-          }
-        },{
-          id: 'dummyRightForFormat',
-          type: 'linear',
-          position: 'right',
-          ticks: {
-            display: false,
-            drawTicks: false,
-          },
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            borderWidth: 5,
-            lineWidth: 2,
-            color: 'grey'
-            
-          },
-          layout: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            },
-            tooltips: {
-              enabled: false,
-              mode: 'index'
-           }
-        },
-      }
-        
-        ],
-        xAxes:[
-          {
-          id: 'date',
-          type: 'time',
-            time: {
-              unit: 'month'
-            },
-
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            lineWidth: 2,
-            color: 'grey'
-          },
-          ticks: {
-            display: true,
-            drawTicks: false,
-            padding: 15,
-            autoSkip: false,
-            maxTicksLimit: 20,
-            
-            
-          },
-          display: true
-        },
-        {
-          id: 'dummyTopForFormat',
-          type: 'linear',
-          position: 'top',
-          ticks: {
-            display: false,
-            drawTicks: false,
-          },
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            borderWidth: 5,
-            lineWidth: 2,
-            color: 'grey'
-            
-          },
-          layout: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            }
-        },
-      }
-        
-
-      
-      ] 
-      }
-    }
-  });
-
-  //**************************************************************Chart Of New US Cases **********************************************************************//
-
-
+  
   document.getElementById("usCasesSummary").textContent= `As of ${mostRecentUsDates}, the number of U.S. reported cases is ${mostRecentUsCases}.`
   document.getElementById("usNewCasesSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsCases} new cases reported in the U.S.`
   document.getElementById("usDeathsSummary").textContent= `As of ${mostRecentUsDates},  ${mostRecentUsDeaths} people have died in the U.S.`
   document.getElementById("usNewDeathsSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsDeaths} new deaths reported in the U.S.`
 
-  window.newUsCasesChart = new Chart('newUsCasesChart', {
-    type: "line",
-    data: {
-      datasets: [{
-        data: newUsCases,
-        drawBorder: true,
-        pointBorderColor: "",
-        pointBackgroundColor: "",
-        borderColor: 'purple',
-        borderWidth: 0,
-        pointBorderWidth: 0,
-        pointHoverRadius: 20,
-        pointHoverBackgroundColor: "darkpurple",
-        pointHoverBorderColor: "",
-        pointHoverBorderWidth: 1,
-        pointRadius: 0,
-        pointHitRadius: 5,
-        pointBackgroundColor: '',
-        backgroundColor: 'red',
-        label: ' Daily U.S. reported cases',
-        fill: false,
-        
-      }],
-      labels: usDates
-    },
-    
-    options: {
-      maintainAspectRatio: true,
-      responsive: true,
-      scales:{
-        yAxes:[
-        {
-          id: 'left-y-axis',
-          type: 'linear',
-          position: 'left',
-          ticks: {
-            display: true,
-            drawTicks: true,
-            padding: 15,
-            autoSkip: false,
-            maxTicksLimit: 5,
-            suggestedMin: 5,
-            beginAtZero: true
-          },
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            lineWidth: 2,
-            color: 'grey',
-          },
-          tooltips: {
-            mode: 'index'
-         }
-
-        },{
-          id: 'dummyRightForFormat',
-          type: 'linear',
-          position: 'right',
-          ticks: {
-            display: false,
-            drawTicks: false,
-            
-          },
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            borderWidth: 5,
-            lineWidth: 2,
-            color: 'grey'
-            
-          },
-          layout: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            }
-        },
-      }
-        
-        ],
-        xAxes:[
-          {
-          id: 'date',
-          type: 'time',
-            time: {
-              unit: 'month'
-            },
-
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            lineWidth: 2,
-            color: 'grey'
-          },
-          ticks: {
-            display: true,
-            drawTicks: false,
-            padding: 15,
-            autoSkip: true,
-            maxTicksLimit: 20
-          },
-          display: true
-        },
-        {
-          id: 'dummyTopForFormat',
-          type: 'linear',
-          position: 'top',
-          ticks: {
-            display: false,
-            drawTicks: false,
-          },
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            borderWidth: 5,
-            lineWidth: 2,
-            color: 'grey'
-            
-          },
-          layout: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            }
-        },
-      }
-        
-
-      
-      ] 
-      }
-    }
-  });
-  //**************************************************************Chart Of US Deaths **********************************************************************//
-
-  usDeathsChart = new Chart('usDeathsChart', {
-    type: "line",
-    data: {
-      datasets: [{
-        data: usDeaths,
-        drawBorder: true,
-        pointBorderColor: "",
-        pointBackgroundColor: "",
-        borderColor: 'red',
-        borderWidth: 0,
-        pointBorderWidth: 0,
-        pointHoverRadius: 20,
-        pointHoverBackgroundColor: "darkred",
-        pointHoverBorderColor: "",
-        pointHoverBorderWidth: 1,
-        pointRadius: 0,
-        pointHitRadius: 5,
-        pointBackgroundColor: '',
-        backgroundColor: 'red',
-        label: 'Total U.S. deaths',
-        fill: false,
-        
-      }],
-      labels: usDates
-    },
-    
-    options: {
-      maintainAspectRatio: true,
-      responsive: true,
-      scales:{
-        yAxes:[
-        {
-          id: 'left-y-axis',
-          type: 'linear',
-          position: 'left',
-          ticks: {
-            display: true,
-            drawTicks: true,
-            padding: 15,
-            autoSkip: false,
-            maxTicksLimit: 5,
-            suggestedMin: 5,
-            beginAtZero: true
-          },
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            lineWidth: 2,
-            color: 'grey',
-          },
-          tooltips: {
-            mode: 'index'
-         }
-
-        },{
-          id: 'dummyRightForFormat',
-          type: 'linear',
-          position: 'right',
-          ticks: {
-            display: false,
-            drawTicks: false,
-            
-          },
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            borderWidth: 5,
-            lineWidth: 2,
-            color: 'grey'
-            
-          },
-          layout: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            }
-        },
-      }
-        
-        ],
-        xAxes:[
-          {
-          id: 'date',
-          type: 'time',
-            time: {
-              unit: 'month'
-            },
-
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            lineWidth: 2,
-            color: 'grey'
-          },
-          ticks: {
-            display: true,
-            drawTicks: false,
-            padding: 15,
-            autoSkip: true,
-            maxTicksLimit: 20
-          },
-          display: true
-        },
-        {
-          id: 'dummyTopForFormat',
-          type: 'linear',
-          position: 'top',
-          ticks: {
-            display: false,
-            drawTicks: false,
-          },
-          gridLines: {
-            display: true,
-            drawTicks: false,
-            drawBorder: true,
-            drawOnChartArea: false,
-            borderWidth: 5,
-            lineWidth: 2,
-            color: 'grey'
-            
-          },
-          layout: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            }
-        },
-      }
-        
-
-      
-      ] 
-      }
-    }
-  });
-
-  //**************************************************************Chart Of Daily Reported US Deaths **********************************************************************//
-
-  window.newUsDeathsChart = new Chart('newUsDeathsChart', {
-  type: "line",
-  data: {
-    datasets: [{
-      data: newUsDeaths,
-      drawBorder: true,
-      pointBorderColor: "",
-      pointBackgroundColor: "",
-      borderColor: 'maroon',
-      borderWidth: 0,
-      pointBorderWidth: 0,
-      pointHoverRadius: 20,
-      pointHoverBackgroundColor: "darkmaroon",
-      pointHoverBorderColor: "",
-      pointHoverBorderWidth: 1,
-      pointRadius: 0,
-      pointHitRadius: 5,
-      pointBackgroundColor: '',
-      backgroundColor: 'red',
-      label: ' Daily U.S. reported deaths',
-      fill: false,
-      
-    }],
-    labels: usDates
-  },
   
-  options: {
-    maintainAspectRatio: true,
-    responsive: true,
-    scales:{
-      yAxes:[
-      {
-        id: 'left-y-axis',
-        type: 'linear',
-        position: 'left',
-        ticks: {
-          display: true,
-          drawTicks: true,
-          padding: 15,
-          autoSkip: false,
-          maxTicksLimit: 5,
-          suggestedMin: 5,
-          beginAtZero: true
-        },
-        gridLines: {
-          display: true,
-          drawTicks: false,
-          drawBorder: true,
-          drawOnChartArea: false,
-          lineWidth: 2,
-          color: 'grey',
-        },
-        tooltips: {
-          mode: 'index'
-       }
 
-      },{
-        id: 'dummyRightForFormat',
-        type: 'linear',
-        position: 'right',
-        ticks: {
-          display: false,
-          drawTicks: false,
-          
-        },
-        gridLines: {
-          display: true,
-          drawTicks: false,
-          drawBorder: true,
-          drawOnChartArea: false,
-          borderWidth: 5,
-          lineWidth: 2,
-          color: 'grey'
-          
-        },
-        layout: {
-          padding: {
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0
-          }
-      },
-    }
-      
-      ],
-      xAxes:[
-        {
-        id: 'date',
-        type: 'time',
-          time: {
-            unit: 'month'
-          },
-
-        gridLines: {
-          display: true,
-          drawTicks: false,
-          drawBorder: true,
-          drawOnChartArea: false,
-          lineWidth: 2,
-          color: 'grey'
-        },
-        ticks: {
-          display: true,
-          drawTicks: false,
-          padding: 15,
-          autoSkip: true,
-          maxTicksLimit: 20
-        },
-        display: true
-      },
-      {
-        id: 'dummyTopForFormat',
-        type: 'linear',
-        position: 'top',
-        ticks: {
-          display: false,
-          drawTicks: false,
-        },
-        gridLines: {
-          display: true,
-          drawTicks: false,
-          drawBorder: true,
-          drawOnChartArea: false,
-          borderWidth: 5,
-          lineWidth: 2,
-          color: 'grey'
-          
-        },
-        layout: {
-          padding: {
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0
-          }
-      },
-    }
-      
-
-    
-    ] 
-    }
   }
-  });
   
-}
 //*********************************************************************************************************************************************************//
 //**************************************************************Chart Of State Cases **********************************************************************//
 //*********************************************************************************************************************************************************//
 function makeStateChart(value){
+  console.log('im at make state chart')
   if (x==0){value = 'Alabama'; x=+1}
   
   selectedStateData = []
@@ -706,7 +122,7 @@ function makeStateChart(value){
     document.getElementById("stateDeathsSummary").textContent= `As of ${mostRecentStateDates}, ${mostRecentStateDeaths} people have died in ${stateName}.`
     document.getElementById("newStateDeathsSummary").textContent= `On ${mostRecentStateDates}, there were ${mostRecentNewStateDeaths} new deaths reported in ${stateName}.`
     
-  
+    
    
     window.stateCasesChart = new Chart('stateCasesChart', {
       type: "line",
@@ -1316,33 +732,33 @@ function destroyChart(chartToDestroy){
   window.newStateDeathsChart.destroy()
 }
 
-function drawChart(){
+function drawChart(chartName, htmlElement, yData, lineColor, hoverColor, label, xData){
 
-  var usChart = new Chart('usChart', {
+  var chartName = new Chart(htmlElement, {
     type: "line",
     data: {
       datasets: [{
-          data: usCases,
+          data: yData,
           drawBorder: true,
           pointBorderColor: "",
           pointBackgroundColor: "",
-          borderColor: 'orange',
+          borderColor: lineColor,
           borderWidth: 0,
           pointBorderWidth: 0,
           pointHoverRadius: 20,
-          pointHoverBackgroundColor: "darkorange",
+          pointHoverBackgroundColor: hoverColor,
           pointHoverBorderColor: "",
           pointHoverBorderWidth: 1,
           pointRadius: 0,
           pointHitRadius: 5,
           pointBackgroundColor: '',
           backgroundColor: 'red',
-          label: 'U.S. total cases',
+          label: label,
           fill: false,
           
           
       }],
-      labels: usDates
+      labels: xData
     },
     options: {
       maintainAspectRatio: true,

@@ -9,8 +9,8 @@ CodeLouisville requires that a minimum of 3 optional features must be met to pas
 -Create an array, dictionary or list, populate it with multiple values, retrieve at least one value, and use or display it in your application
     Multiple arrays are created in my project to easily find data
 
--Create and use a function that accepts two or more values (parameters), calculates or determines a new value based on those inputs, and returns a new value
-    This was met by the drawChart function. ADD THIS
+-Create and use a function that accepts two or more values(parameters), calculates or determines a new value based on those inputs, and returns a new value
+    The drawChart function brings in multiple values and defines and creates a chart each time
     
 -Visualize data in a graph, chart, or other visual representation of data
     The main premise of the app is to create charts based on Covid data

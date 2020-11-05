@@ -11,8 +11,11 @@ body{
     
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 4rem;
+    
     
 }
 
 
+.statesList{
+    text-align: center;
+}

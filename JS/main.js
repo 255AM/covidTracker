@@ -19,7 +19,7 @@ d3.csv(stateCsv, function(data) {
 }).then(makeStateChart)
 
 function makeUsChart(){
-  usDates = usData.map(function(d) {return d.date});
+  usDates = usData.map(function(d) {return d.date})
   usCases = usData.map(function(d) {return d.cases})
   usDeaths = usData.map(function(d) {return d.deaths})
 
@@ -1308,13 +1308,170 @@ function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
 
-function destroyChart(){
+function destroyChart(chartToDestroy){
+  
   window.stateCasesChart.destroy()
   window.newStateCasesChart.destroy()
   window.stateDeathsChart.destroy()
   window.newStateDeathsChart.destroy()
-  
 }
+
+function drawChart(){
+
+  var usChart = new Chart('usChart', {
+    type: "line",
+    data: {
+      datasets: [{
+          data: usCases,
+          drawBorder: true,
+          pointBorderColor: "",
+          pointBackgroundColor: "",
+          borderColor: 'orange',
+          borderWidth: 0,
+          pointBorderWidth: 0,
+          pointHoverRadius: 20,
+          pointHoverBackgroundColor: "darkorange",
+          pointHoverBorderColor: "",
+          pointHoverBorderWidth: 1,
+          pointRadius: 0,
+          pointHitRadius: 5,
+          pointBackgroundColor: '',
+          backgroundColor: 'red',
+          label: 'U.S. total cases',
+          fill: false,
+          
+          
+      }],
+      labels: usDates
+    },
+    options: {
+      maintainAspectRatio: true,
+      responsive: true,
+      tooltips: {
+        enabled:true,
+        mode: 'index',
+        intersect: true
+      },
+      scales:{
+        yAxes:[
+        {
+          id: 'left-y-axis',
+          type: 'linear',
+          position: 'left',
+          ticks: {
+            display: true,
+            drawTicks: true,
+            padding: 15,
+            autoSkip: false,
+            maxTicksLimit: 5,
+            suggestedMin: 5,
+            beginAtZero: true
+
+          },
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            lineWidth: 2,
+            color: 'grey'
+          }
+        },{
+          id: 'dummyRightForFormat',
+          type: 'linear',
+          position: 'right',
+          ticks: {
+            display: false,
+            drawTicks: false,
+          },
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            borderWidth: 5,
+            lineWidth: 2,
+            color: 'grey'
+            
+          },
+          layout: {
+            padding: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0
+            },
+            tooltips: {
+              enabled: false,
+              mode: 'index'
+           }
+        },
+      }
+        
+        ],
+        xAxes:[
+          {
+          id: 'date',
+          type: 'time',
+            time: {
+              unit: 'month'
+            },
+
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            lineWidth: 2,
+            color: 'grey'
+          },
+          ticks: {
+            display: true,
+            drawTicks: false,
+            padding: 15,
+            autoSkip: false,
+            maxTicksLimit: 20,
+            
+            
+          },
+          display: true
+        },
+        {
+          id: 'dummyTopForFormat',
+          type: 'linear',
+          position: 'top',
+          ticks: {
+            display: false,
+            drawTicks: false,
+          },
+          gridLines: {
+            display: true,
+            drawTicks: false,
+            drawBorder: true,
+            drawOnChartArea: false,
+            borderWidth: 5,
+            lineWidth: 2,
+            color: 'grey'
+            
+          },
+          layout: {
+            padding: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0
+            }
+        },
+      }
+        
+
+      
+      ] 
+      }
+    }
+  });
+}
+
 
 
 function mostRecent(array){

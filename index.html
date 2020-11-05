@@ -30,48 +30,44 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        
-        
-            
-        <div class = 'wrapper'>   
+    <div class = 'container-fluid'>   
             <div id ='title' class = 'title'><h1><p id="titlep">Covid-19 Tracker</h1></p></div> 
              
                 <div class= 'container-fluid'>  
                     <div class = "row">
                         <div class = "col">
-                            <h2><p>Total U.S. Cases</p></h2>
-                                <div id="usCases" class = "grid-child1"><h3><p id = "usCasesSummary">also, ive got something to say</p></h3><canvas id="usChart" ></canvas></div>
+                            <div><h2><p>Total U.S. Cases</p></h2></div>
+                                <div id="usCases" ><h3><p id = "usCasesSummary">also, ive got something to say</p></h3></div>
+                                    <div><canvas id="usChart" ></canvas></div>
                         </div>
                         
                         <div class = "col">
-                            <h2><p>Daily U.S. Cases</p></h2>
-                            
-                                <div id="newUsCases" class = "grid-child2"><h3><p id = "usNewCasesSummary">also, ive got something to say</p></h3> <canvas id="newUsCasesChart" ></canvas></div>
-                            
+                            <div><h2><p>Daily U.S. Cases</p></h2></div>
+                            <div id="newUsCases"><h3><p id = "usNewCasesSummary">also, ive got something to say</p></h3></div>
+                            <div><canvas id="newUsCasesChart" ></canvas></div>
                         </div>
                     </div>
                 </div> 
                 <div class= 'container-fluid'>
                     <div class = "row">
                         <div class = "col">
-                            
-                                <h2><p>Total U.S. Deaths</p></h2>
-                                <div id="usDeaths" class="grid-child3"><h3><p id = "usDeathsSummary">also, ive got something to say</p></h3><canvas id="usDeathsChart" ></canvas></div>
+                            <h2><p>Total U.S. Deaths</p></h2>
+                                <div id="usDeaths"><h3><p id = "usDeathsSummary">also, ive got something to say</p></h3></div>
+                                    <div><canvas id="usDeathsChart" ></canvas></div>
                             
                         </div>
                         <div class = "col">
-                            
-                                <h2><p>Daily U.S. Deaths</p></h2>
-                                <div id="newUsDeaths" class="grid-child4"><h3><p id = "usNewDeathsSummary">also, ive got something to say</p></h3><canvas id="newUsDeathsChart" ></canvas></div>
-                            
+                            <h2><p>Daily U.S. Deaths</p></h2>
+                            <div id="newUsDeaths"><h3><p id = "usNewDeathsSummary">also, ive got something to say</p></h3></div>
+                            <div><canvas id="newUsDeathsChart" ></canvas></div>
                         </div>
                     </div>
                 </div> 
                 
                 <div class= 'container-fluid'>
                     <div class = 'row' >
-                        <div class = "col">
-                            <select id = "statesList" select name='type' onmousedown= "this.value = '' " ; onchange= "destroyChart();makeStateChart(this.value);" ></select>
+                        <div class = 'container-fluid' class = "list-child">
+                        <select id = "statesList" select name='type' onmousedown= "this.value = '' " ; onchange= "destroyChart();makeStateChart(this.value);" ></select>
                         </div>
                     </div>
                 </div>
@@ -79,36 +75,33 @@
                 <div class= 'container-fluid'>
                     <div class = "row">
                         <div class = "col">
-                            
-                                <h2><p>Total State Cases</p></h2>
-                                <div id="stateCases" class='grid-child5'><h3><p id = "stateCasesSummary">also, ive got something to say</p></h3><canvas id="stateCasesChart" ></canvas></div>
-                            
+                            <div><h2><p>Total State Cases</p></h2></div>
+                                <div id="stateCases"><h3><p id = "stateCasesSummary">also, ive got something to say</p></h3></div>
+                                <div><canvas id="stateCasesChart" ></canvas></div>
                         </div>
                         <div class = "col">
                             
-                                <h2><p>Daily State Cases</p></h2>
-                                <div id= 'newStateCases' class = "grid-child6"><h3><p id = "newStateCasesSummary">also, ive got something to say</p></h3><canvas id="newStateCasesChart" ></canvas></div>
-                            
+                                <div><h2><p>Daily State Cases</p></h2></div>
+                                <div id= 'newStateCases'><h3><p id = "newStateCasesSummary">also, ive got something to say</p></h3></div>
+                            <div><canvas id="newStateCasesChart" ></canvas></div>
                         </div>
                     </div>
                 </div>
-                <div class= 'container-fluid'>
+                <div class= 'container-fluid'></div>
                     <div class = "row">
                         <div class = "col">
-                            
-                                <h2><p>Total State Deaths</p></h2>
-                                <div id = 'stateDeaths' class = "grid-child7"><h3><p id = "stateDeathsSummary">also, ive got something to say</p></h3><canvas id="stateDeathsChart" ></canvas></div>
-                            
+                            <div><h2><p>Total State Deaths</p></h2></div>
+                                <div id = 'stateDeaths'><h3><p id = "stateDeathsSummary">also, ive got something to say</p></h3></div>
+                                <div><canvas id="stateDeathsChart" ></canvas></div>
                         </div>
                         <div class = "col">
                             
-                                <h2><p>Daily State Deaths</p></h2>
-                                <div id= 'newStateDeaths' class = "grid-child8"><h3><p id = "newStateDeathsSummary">also, ive got something to say</p></h3><canvas id="newStateDeathsChart" ></canvas></div>
-                            
+                                <div><h2><p>Daily State Deaths</p></h2></div>
+                                <div id= 'newStateDeaths'><h3><p id = "newStateDeathsSummary">also, ive got something to say</p></h3></div>
+                                <div><canvas id="newStateDeathsChart" ></canvas></div>
                         </div>
                     </div>
-                </div>
-            
+                 </div> 
             
                 
                 

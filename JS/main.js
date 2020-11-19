@@ -10,7 +10,6 @@ let uniqueStates = []
 let x = 0
 let lastReportedUsDate = x
 
-
 //bring in data from remote csv using d3 library
 d3.csv(usCsv, function(data) {
   usData.push(data)
@@ -22,7 +21,6 @@ d3.csv(stateCsv, function(data) {
 }).then(makeStateChart)
 
 function makeUsChart(){
-  console.log('imhere makesUdchart')
   usDates = usData.map(function(d) {return d.date})
   usCases = usData.map(function(d) {return d.cases})
   usDeaths = usData.map(function(d) {return d.deaths})
@@ -37,30 +35,21 @@ function makeUsChart(){
       newUsDeaths.push(usDeaths[index] - usDeaths[index - 1])
     } 
 
-    let mostRecentUsDeaths = numberWithCommas(mostRecent(usDeaths))
-    let mostRecentUsCases = numberWithCommas(mostRecent(usCases))
-    let mostRecentNewUsCases = numberWithCommas(mostRecent(newUsCases))
-    let mostRecentNewUsDeaths = numberWithCommas(mostRecent(newUsDeaths))
-    let mostRecentUsDates = mostRecent(usDates)
+  let mostRecentUsDeaths = numberWithCommas(mostRecent(usDeaths))
+  let mostRecentUsCases = numberWithCommas(mostRecent(usCases))
+  let mostRecentNewUsCases = numberWithCommas(mostRecent(newUsCases))
+  let mostRecentNewUsDeaths = numberWithCommas(mostRecent(newUsDeaths))
+  let mostRecentUsDates = mostRecent(usDates)
 
-   
+  drawChart(usChart, 'usChart', usCases, 'orange', 'darkorange', 'Us Reported Cases', usDates)
+  drawChart(newUsCasesChart, 'newUsCasesChart', newUsCases, 'purple', 'darkpurple', 'Daily Us Reported Cases', usDates) 
+  drawChart(usDeathsChart, 'usDeathsChart', usDeaths, 'red', 'darkred', ' Total U.S. Deaths', usDates)
+  drawChart(window.newUsDeathsChart, 'newUsDeathsChart', newUsDeaths, 'maroon', 'darkmaroon', ' Daily U.S. reported deaths', usDates)
  
- 
- drawChart(usChart, 'usChart', usCases, 'orange', 'darkorange', 'Us Reported Cases', usDates)
- drawChart(newUsCasesChart, 'newUsCasesChart', newUsCases, 'purple', 'darkpurple', 'Daily Us Reported Cases', usDates) 
- drawChart(usDeathsChart, 'usDeathsChart', usDeaths, 'red', 'darkred', ' Total U.S. Deaths', usDates)
- drawChart(window.newUsDeathsChart, 'newUsDeathsChart', newUsDeaths, 'maroon', 'darkmaroon', ' Daily U.S. reported deaths', usDates)
- 
-
-  console.log('drw chart')
-
-  
   document.getElementById("usCasesSummary").textContent= `As of ${mostRecentUsDates}, the number of U.S. reported cases is ${mostRecentUsCases}.`
   document.getElementById("usNewCasesSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsCases} new cases reported in the U.S.`
   document.getElementById("usDeathsSummary").textContent= `As of ${mostRecentUsDates},  ${mostRecentUsDeaths} people have died in the U.S.`
   document.getElementById("usNewDeathsSummary").textContent= `On ${mostRecentUsDates}, there were ${mostRecentNewUsDeaths} new deaths reported in the U.S.`
-
-  
 
   }
   
@@ -112,6 +101,7 @@ function makeStateChart(value){
     document.getElementById("newStateCasesSummary").textContent= `On ${mostRecentStateDates}, there were ${mostRecentNewStateCases} new cases reported in ${stateName}`
     document.getElementById("stateDeathsSummary").textContent= `As of ${mostRecentStateDates}, ${mostRecentStateDeaths} people have died in ${stateName}.`
     document.getElementById("newStateDeathsSummary").textContent= `On ${mostRecentStateDates}, there were ${mostRecentNewStateDeaths} new deaths reported in ${stateName}.`
+    
     //Define and create all state charts
     window.stateCasesChart = new Chart('stateCasesChart', {
       type: "line",
@@ -134,11 +124,9 @@ function makeStateChart(value){
           backgroundColor: 'red',
           label: stateName + ' total cases',
           fill: false,
-          
         }],
         labels: stateDates
       },
-      
       options: {
         maintainAspectRatio: true,
         responsive: true,
@@ -176,7 +164,6 @@ function makeStateChart(value){
             ticks: {
               display: false,
               drawTicks: false,
-              
             },
             gridLines: {
               display: true,
@@ -186,7 +173,6 @@ function makeStateChart(value){
               borderWidth: 5,
               lineWidth: 2,
               color: 'grey'
-              
             },
             layout: {
               padding: {
@@ -197,7 +183,6 @@ function makeStateChart(value){
               }
           },
         }
-          
           ],
           xAxes:[
             {
@@ -240,7 +225,6 @@ function makeStateChart(value){
               borderWidth: 5,
               lineWidth: 2,
               color: 'grey'
-              
             },
             layout: {
               padding: {
@@ -276,13 +260,11 @@ function makeStateChart(value){
         pointHitRadius: 5,
         pointBackgroundColor: '',
         backgroundColor: 'red',
-        
         label: stateName + ' daily reported cases',
         fill: false,
       }],
       labels: stateDates
     },
-    
     options: {
       maintainAspectRatio: true,
       responsive: true,
@@ -312,7 +294,6 @@ function makeStateChart(value){
           tooltips: {
             mode: 'index'
          }
-
         },{
           id: 'dummyRightForFormat',
           type: 'linear',
@@ -320,7 +301,6 @@ function makeStateChart(value){
           ticks: {
             display: false,
             drawTicks: false,
-            
           },
           gridLines: {
             display: true,
@@ -330,7 +310,6 @@ function makeStateChart(value){
             borderWidth: 5,
             lineWidth: 2,
             color: 'grey'
-            
           },
           layout: {
             padding: {
@@ -341,7 +320,6 @@ function makeStateChart(value){
             }
         },
       }
-        
         ],
         xAxes:[
           {
@@ -400,7 +378,6 @@ function makeStateChart(value){
     }
   });
     //**************************************************************Chart Of State Deaths **********************************************************************//
-
   stateDeathsChart = new Chart('stateDeathsChart', {
     type: "line",
     data: {
@@ -422,11 +399,9 @@ function makeStateChart(value){
         backgroundColor: 'red',
         label: stateName + ' total deaths',
         fill: false,
-        
       }],
       labels: stateDates
     },
-    
     options: {
       maintainAspectRatio: true,
       responsive: true,
@@ -474,7 +449,6 @@ function makeStateChart(value){
             borderWidth: 5,
             lineWidth: 2,
             color: 'grey'
-            
           },
           layout: {
             padding: {
@@ -485,7 +459,6 @@ function makeStateChart(value){
             }
         },
       }
-        
         ],
         xAxes:[
           {
@@ -494,7 +467,6 @@ function makeStateChart(value){
             time: {
               unit: 'month'
             },
-
           gridLines: {
             display: true,
             drawTicks: false,
@@ -528,7 +500,6 @@ function makeStateChart(value){
             borderWidth: 5,
             lineWidth: 2,
             color: 'grey'
-            
           },
           layout: {
             padding: {
@@ -688,7 +659,7 @@ function makeStateChart(value){
     }
   });
 }  
- 
+//select states only once to populate dropdown 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
@@ -703,7 +674,7 @@ function destroyChart(chartToDestroy){
 //function defined to create US charts
 function drawChart(chartName, htmlElement, yData, lineColor, hoverColor, label, xData){
 
-  var chartName = new Chart(htmlElement, {
+  new Chart(htmlElement, {
     type: "line",
     data: {
       datasets: [{
@@ -724,8 +695,6 @@ function drawChart(chartName, htmlElement, yData, lineColor, hoverColor, label, 
           backgroundColor: 'red',
           label: label,
           fill: false,
-          
-          
       }],
       labels: xData
     },
@@ -792,7 +761,6 @@ function drawChart(chartName, htmlElement, yData, lineColor, hoverColor, label, 
            }
         },
       }
-        
         ],
         xAxes:[
           {
@@ -801,7 +769,6 @@ function drawChart(chartName, htmlElement, yData, lineColor, hoverColor, label, 
             time: {
               unit: 'month'
             },
-
           gridLines: {
             display: true,
             drawTicks: false,
@@ -816,8 +783,6 @@ function drawChart(chartName, htmlElement, yData, lineColor, hoverColor, label, 
             padding: 15,
             autoSkip: false,
             maxTicksLimit: 20,
-            
-            
           },
           display: true
         },
@@ -837,7 +802,6 @@ function drawChart(chartName, htmlElement, yData, lineColor, hoverColor, label, 
             borderWidth: 5,
             lineWidth: 2,
             color: 'grey'
-            
           },
           layout: {
             padding: {
@@ -848,9 +812,6 @@ function drawChart(chartName, htmlElement, yData, lineColor, hoverColor, label, 
             }
         },
       }
-        
-
-      
       ] 
       }
     }

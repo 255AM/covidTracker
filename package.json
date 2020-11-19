@@ -1,0 +1,19 @@
+{
+  "name": "covidtracker",
+  "version": "1.0.0",
+  "description": "charting covid data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/255AM/covidTracker.git"
+  },
+  "author": "chance lane",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/255AM/covidTracker/issues"
+  },
+  "homepage": "https://github.com/255AM/covidTracker#readme"
+}

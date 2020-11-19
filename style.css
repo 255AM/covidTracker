@@ -1,8 +1,8 @@
 body{
-    background-color: seashell;
+    background-color: rgb(211, 209, 207);
 }
 .title{
-    background-color: rgb(177, 136, 136);
+    background-color: rgb(98, 104, 105);
     text-align: center;
     padding: 4rem;
     color: rgb(27, 27, 27);
@@ -11,11 +11,7 @@ body{
     
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    
-    
 }
-
-
 .statesList{
     text-align: center;
 }
